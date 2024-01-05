@@ -12,7 +12,7 @@ with open("data/hungarian.data", encoding='Latin1') as file:
   
 data = itertools.takewhile(
   lambda x: len(x) == 76,
-  (' '.join(lines[i: (i + 10)]).split() for i in range(0, (lines),10))
+  (' '.join(lines[i: (i + 10)]).split() for i in range(0, len(lines),10))
 )
 
 df = pd.DataFrame.from_records(data)
@@ -85,7 +85,7 @@ y = df_clean['target']
 smote = SMOTE(random_state = 42)
 X, y = smote.fit_resample(X, y)
 
-model = pickle.load(open('model/xgb.pkl', 'rb'))
+model = pickle.load(open('model/xgb_model.pkl', 'rb'))
 
 y_pred = model.predict(X)
 accuracy = accuracy_score(y, y_pred)
