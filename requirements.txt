@@ -1,7 +1,6 @@
 pandas
 numpy
-imblearn
-# imbalanced-learn
+imbalanced-learn
 scikit-learn
 streamlit
 xgboost
