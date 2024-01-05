@@ -1,5 +1,6 @@
 pandas
 numpy
+imblearn
 imbalanced-learn
 scikit-learn
 streamlit
