@@ -220,29 +220,33 @@ with tab1:
   if predict_btn:
     inputs = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak]]
     prediction = model.predict(inputs)[0]
+    
+    # bar = st.progress(0)
+    # status_text = st.empty()
 
-    bar = st.progress(0)
-    status_text = st.empty()
+    # for i in range(1, 101):
+    #   status_text.text(f"{i}% complete")
+    #   bar.progress(i)
+    #   time.sleep(0.01)
+    #   if i == 100:
+    #     time.sleep(1)
+    #     status_text.empty()
+    #     bar.empty()
+  
+    with st.spinner('Predicting...'):
+            time.sleep(2)
+    result = ":green[**Healthy**]" if prediction == 0 else f":orange[**Heart disease level {prediction}**]"
 
-    for i in range(1, 101):
-      status_text.text(f"{i}% complete")
-      bar.progress(i)
-      time.sleep(0.01)
-      if i == 100:
-        time.sleep(1)
-        status_text.empty()
-        bar.empty()
-
-    if prediction == 0:
-      result = ":green[**Healthy**]"
-    elif prediction == 1:
-      result = ":orange[**Heart disease level 1**]"
-    elif prediction == 2:
-      result = ":orange[**Heart disease level 2**]"
-    elif prediction == 3:
-      result = ":red[**Heart disease level 3**]"
-    elif prediction == 4:
-      result = ":red[**Heart disease level 4**]"
+    # if prediction == 0:
+    #   result = ":green[**Healthy**]"
+    # elif prediction == 1:
+    #   result = ":orange[**Heart disease level 1**]"
+    # elif prediction == 2:
+    #   result = ":orange[**Heart disease level 2**]"
+    # elif prediction == 3:
+    #   result = ":red[**Heart disease level 3**]"
+    # elif prediction == 4:
+    #   result = ":red[**Heart disease level 4**]"
 
   st.write("")
   st.write("")
