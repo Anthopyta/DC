@@ -202,18 +202,18 @@ if predict_btn:
     prediction = make_prediction(model, inputs)
     result = display_result(prediction)
     
-with st.spinner('Predicting...'):
-    time.sleep(2)
-if prediction == 0:
-    result = ":green[**Healthy**]"
-elif prediction == 1:
-    result = ":yellow[**Heart disease level 1**]"
-elif prediction == 2:
-    result = ":orange[**Heart disease level 2**]"
-elif prediction == 3:
-    result = ":red[**Heart disease level 3**]"
-elif prediction == 4:
-    result = ":red[**Heart disease level 4**]"
+    with st.spinner('Predicting...'):
+        time.sleep(2)
+    if prediction == 0:
+        result = ":green[**Healthy**]"
+    elif prediction == 1:
+        result = ":yellow[**Heart disease level 1**]"
+    elif prediction == 2:
+        result = ":orange[**Heart disease level 2**]"
+    elif prediction == 3:
+        result = ":red[**Heart disease level 3**]"
+    elif prediction == 4:
+        result = ":red[**Heart disease level 4**]"
     
 st.write("")
 st.write("")
