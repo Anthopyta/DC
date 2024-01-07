@@ -461,55 +461,6 @@ with st.sidebar.expander("Multi Prediction", expanded=False):
         with col2:
             st.dataframe(uploaded_df)
 
-# Download CSV Example and Upload CSV
-# with st.sidebar.expander("Data Upload", expanded=False):
-    st.header("Data Upload")
-
-    sample_csv = df_final.iloc[:5, :-1].to_csv(index=False).encode('utf-8')
-    st.download_button("Download CSV Example", data=sample_csv, file_name='sample_heart_disease_parameters.csv', mime='text/csv', key="unique_download_button_key")
-
-    st.write("")
-    st.write("")
-    file_uploaded = st.file_uploader("Upload a CSV file", type='csv')
-
-    if file_uploaded:
-        uploaded_df = pd.read_csv(file_uploaded)
-        prediction_arr = model.predict(uploaded_df)
-
-        bar = st.progress(0)
-        status_text = st.empty()
-
-        for i in range(1, 101):
-            status_text.text(f"{i}% complete")
-            bar.progress(i)
-            time.sleep(0.01)
-
-        result_arr = []
-
-        for prediction in prediction_arr:
-            if prediction == 0:
-                result = "Healthy"
-            else:
-                result = f"Heart disease level {prediction}"
-            result_arr.append(result)
-
-        uploaded_result = pd.DataFrame({'Prediction Result': result_arr})
-
-        for i in range(70, 101):
-            status_text.text(f"{i}% complete")
-            bar.progress(i)
-            time.sleep(0.01)
-            if i == 100:
-                time.sleep(1)
-                status_text.empty()
-                bar.empty()
-
-        col1, col2 = st.columns([1, 2])
-
-        with col1:
-            st.dataframe(uploaded_result)
-        with col2:
-            st.dataframe(uploaded_df)
 
 # Footer and Creative Elements
 st.sidebar.text("")
