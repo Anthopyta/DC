@@ -310,16 +310,6 @@ df_final['target'] = y
 #     with col2:
 #       st.dataframe(uploaded_df)
 
-import itertools
-import pandas as pd
-import numpy as np
-from imblearn.over_sampling import SMOTE
-from sklearn.metrics import accuracy_score
-import streamlit as st
-import time
-import pickle
-
-# Read and preprocess the data (your existing code)
 
 # Function to make predictions
 def make_prediction(model, inputs):
@@ -340,6 +330,8 @@ st.set_page_config(
 )
 
 st.title("Hungarian Heart Disease Prediction")
+st.write(f"**_Model's Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])")
+st.write("")
 st.sidebar.header("**User Input** Sidebar")
 
 # User Input for Single Prediction
@@ -396,7 +388,28 @@ with st.sidebar.expander("Single Prediction", expanded=True):
         exang = 1
 
     oldpeak = st.number_input(label=":violet[**ST depression induced by exercise relative to rest**]", min_value=df_final['oldpeak'].min(), max_value=df_final['oldpeak'].max())
-
+    
+    data = {
+        'Age': age,
+        'Sex': sex_sb,
+        'Chest pain type': cp_sb,
+        'RPB': f"{trestbps} mm Hg",
+        'Serum Cholestoral': f"{chol} mg/dl",
+        'FBS > 120 mg/dl?': fbs_sb,
+        'Resting ECG': restecg_sb,
+        'Maximum heart rate': thalach,
+        'Exercise induced angina?': exang_sb,
+        'ST depression': oldpeak,
+    }
+    
+    preview_df = pd.DataFrame(data, index=['input'])
+    st.header("User Input as DataFrame")
+    st.write("")
+    st.dataframe(preview_df.iloc[:, :6])
+    st.write("")
+    st.dataframe(preview_df.iloc[:, 6:])
+    st.write("")
+        
     result = ":violet[-]"
     predict_btn = st.button("**Predict**", type="primary")
 
@@ -405,11 +418,17 @@ with st.sidebar.expander("Single Prediction", expanded=True):
         prediction = make_prediction(model, inputs)
         result = display_result(prediction)
 
+    with st.spinner('Predicting...'):
+        time.sleep(2)
+    result = ":green[**Healthy**]" if prediction == 0 else f":orange[**Heart disease level {prediction}**]"
+    
+    st.write("")
+    st.write("")
     st.subheader("Prediction:")
     st.subheader(result)
 
 # User Input for Multi Prediction
-with st.sidebar.expander("Multi Prediction", expanded=False):
+with st.tabs.expander("Multi Prediction", expanded=False):
     st.header("Multi Prediction")
 
     # Download CSV Example
