@@ -201,10 +201,15 @@ if predict_btn:
     inputs = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak]]
     prediction = make_prediction(model, inputs)
     result = display_result(prediction)
-
+    
 with st.spinner('Predicting...'):
-        time.sleep(2)
-result = ":green[**Healthy**]" if prediction == 0 else f":orange[**Heart disease level {prediction}**]" if prediction in (1, 2) else f":red[**Heart disease level {prediction}**]"
+    time.sleep(2)
+if prediction == 0:
+    result = ":green[**Healthy**]"
+elif prediction in (1, 2):
+    result = f":orange[**Heart disease level {prediction}**]"
+else:
+    result = f":red[**Heart disease level {prediction}**]"
 
 st.write("")
 st.write("")
