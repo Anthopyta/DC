@@ -389,43 +389,43 @@ with st.sidebar.expander("Single Prediction", expanded=True):
 
     oldpeak = st.number_input(label=":violet[**ST depression induced by exercise relative to rest**]", min_value=df_final['oldpeak'].min(), max_value=df_final['oldpeak'].max())
     
-    data = {
-        'Age': age,
-        'Sex': sex_sb,
-        'Chest pain type': cp_sb,
-        'RPB': f"{trestbps} mm Hg",
-        'Serum Cholestoral': f"{chol} mg/dl",
-        'FBS > 120 mg/dl?': fbs_sb,
-        'Resting ECG': restecg_sb,
-        'Maximum heart rate': thalach,
-        'Exercise induced angina?': exang_sb,
-        'ST depression': oldpeak,
-    }
+data = {
+    'Age': age,
+    'Sex': sex_sb,
+    'Chest pain type': cp_sb,
+    'RPB': f"{trestbps} mm Hg",
+    'Serum Cholestoral': f"{chol} mg/dl",
+    'FBS > 120 mg/dl?': fbs_sb,
+    'Resting ECG': restecg_sb,
+    'Maximum heart rate': thalach,
+    'Exercise induced angina?': exang_sb,
+    'ST depression': oldpeak,
+}
+
+preview_df = pd.DataFrame(data, index=['input'])
+st.header("User Input as DataFrame")
+st.write("")
+st.dataframe(preview_df.iloc[:, :6])
+st.write("")
+st.dataframe(preview_df.iloc[:, 6:])
+st.write("")
     
-    preview_df = pd.DataFrame(data, index=['input'])
-    st.header("User Input as DataFrame")
-    st.write("")
-    st.dataframe(preview_df.iloc[:, :6])
-    st.write("")
-    st.dataframe(preview_df.iloc[:, 6:])
-    st.write("")
-        
-    result = ":violet[-]"
-    predict_btn = st.button("**Predict**", type="primary")
+result = ":violet[-]"
+predict_btn = st.button("**Predict**", type="primary")
 
-    if predict_btn:
-        inputs = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak]]
-        prediction = make_prediction(model, inputs)
-        result = display_result(prediction)
+if predict_btn:
+    inputs = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak]]
+    prediction = make_prediction(model, inputs)
+    result = display_result(prediction)
 
-    with st.spinner('Predicting...'):
+with st.spinner('Predicting...'):
         time.sleep(2)
-    result = ":green[**Healthy**]" if prediction == 0 else f":orange[**Heart disease level {prediction}**]"
-    
-    st.write("")
-    st.write("")
-    st.subheader("Prediction:")
-    st.subheader(result)
+result = ":green[**Healthy**]" if prediction == 0 else f":orange[**Heart disease level {prediction}**]"
+
+st.write("")
+st.write("")
+st.subheader("Prediction:")
+st.subheader(result)
 
 # User Input for Multi Prediction
 with st.tabs.expander("Multi Prediction", expanded=False):
@@ -482,7 +482,7 @@ with st.tabs.expander("Multi Prediction", expanded=False):
 
 
 # Footer
-st.sidebar.text("")
-st.sidebar.markdown("**_Explore your heart health!_** :heart: :chart_with_upwards_trend:")
+st.text("")
+st.markdown("**_Explore your heart health!_** :heart: :chart_with_upwards_trend:")
 
 
