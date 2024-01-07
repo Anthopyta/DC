@@ -204,12 +204,7 @@ if predict_btn:
     
 with st.spinner('Predicting...'):
     time.sleep(2)
-if prediction == 0:
-    result = ":green[**Healthy**]"
-elif prediction in (1, 2):
-    result = f":orange[**Heart disease level {prediction}**]"
-else:
-    result = f":red[**Heart disease level {prediction}**]"
+result = ":green[**Healthy**]" if prediction == 0 else f":orange[**Heart disease level {prediction}**]" if prediction == 3 and 4 else f":orange[**Heart disease level {prediction}**]"
 
 st.write("")
 st.write("")
