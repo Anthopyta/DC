@@ -462,13 +462,8 @@ with st.sidebar.expander("Multi Prediction", expanded=False):
             st.dataframe(uploaded_df)
 
 
-# Footer and Creative Elements
+# Footer
 st.sidebar.text("")
-st.sidebar.text("")
-st.sidebar.text(":information_source: _Note: The predictions are for demonstration purposes and may not be accurate._")
-
-# Creative Elements
-st.sidebar.image("path/to/your/image.png", use_column_width=True)  # Replace with your image path
 st.sidebar.markdown("**_Explore your heart health!_** :heart: :chart_with_upwards_trend:")
 
 
