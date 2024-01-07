@@ -415,7 +415,7 @@ with st.sidebar.expander("Multi Prediction", expanded=False):
     # Download CSV Example
     sample_csv = df_final.iloc[:5, :-1].to_csv(index=False).encode('utf-8')
     st.write("")
-    # st.download_button("Download CSV Example", data=sample_csv, file_name='sample_heart_disease_parameters.csv', mime='text/csv',  key="unique_download_button_key")
+    st.download_button("Download CSV Example", data=sample_csv, file_name='sample_heart_disease_parameters.csv', mime='text/csv',  key="unique_download_button_key")
 
     # Upload CSV
     st.write("")
@@ -462,7 +462,7 @@ with st.sidebar.expander("Multi Prediction", expanded=False):
             st.dataframe(uploaded_df)
 
 # Download CSV Example and Upload CSV
-with st.sidebar.expander("Data Upload", expanded=False):
+# with st.sidebar.expander("Data Upload", expanded=False):
     st.header("Data Upload")
 
     sample_csv = df_final.iloc[:5, :-1].to_csv(index=False).encode('utf-8')
